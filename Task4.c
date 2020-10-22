@@ -15,15 +15,10 @@ int main(int argc, char *argv[])
         int descriptor = open(filename, O_RDONLY);
     
         if (descriptor != -1) {
-            FILE *file = fdopen(descriptor, "rb");
-    
-            if (file) {
-                struct stat statistics;
-    
-                if (fstat(descriptor, &statistics) != -1) {
-                    printf("Размер файла %s: %ld", filename, statistics.st_size);
-                }
-                fclose(file);
+            struct stat statistics;
+
+            if (fstat(descriptor, &statistics) != -1) {
+                printf("Размер файла %s: %ld", filename, statistics.st_size);
             }
             close(descriptor);
         }
